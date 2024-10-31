@@ -360,6 +360,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('settings/inactive', [GeneralSettingController::class, 'inactive'])->name('settings.inactive');
     Route::post('settings/active', [GeneralSettingController::class, 'active'])->name('settings.active');
     Route::post('settings/destroy', [GeneralSettingController::class, 'destroy'])->name('settings.destroy');
+    Route::post('settings/cache-reboot', [GeneralSettingController::class, 'cache_reboot'])->name('settings.cache_reboot');
 
     // settings route
     Route::get('social-media/manage', [SocialMediaController::class, 'index'])->name('socialmedias.index');

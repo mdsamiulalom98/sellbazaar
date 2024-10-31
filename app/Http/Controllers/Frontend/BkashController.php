@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\PaymentGateway;
 use Session;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Cart;
 use Illuminate\Support\Str;
 

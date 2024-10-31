@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 use App\Models\CustomerProfit;
 use App\Models\Customer;
 use App\Models\IpBlock;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Image;
 use File;
 use Auth;
@@ -22,14 +22,14 @@ class CustomerManageController extends Controller
          $this->middleware('permission:customer-manage-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:customer-manage-delete', ['only' => ['destroy']]);
     }
-    
+
     public function index(Request $request){
         if($request->keyword){
             $show_data = Customer::orWhere('phone',$request->keyword)->orWhere('name',$request->keyword)->paginate(20);
         }else{
              $show_data = Customer::paginate(20);
         }
-       
+
         return view('backEnd.customer.index',compact('show_data'));
     }
 
@@ -37,7 +37,7 @@ class CustomerManageController extends Controller
         $edit_data = Customer::find($id);
         return view('backEnd.customer.edit',compact('edit_data'));
     }
-    
+
     public function update(Request $request){
         $this->validate($request, [
             'name' => 'required',
@@ -48,23 +48,23 @@ class CustomerManageController extends Controller
         $input = $request->except('hidden_id');
         $update_data = Customer::find($request->hidden_id);
         // new password
-        
-        
-        if(!empty($input['password'])){ 
+
+
+        if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = Arr::except($input,array('password'));    
+            $input = Arr::except($input,array('password'));
         }
 
         // new image
         $image = $request->file('image');
         if($image){
-            // image with intervention 
+            // image with intervention
             $name =  time().'-'.$image->getClientOriginalName();
             $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp',$name);
             $name = strtolower(preg_replace('/\s+/', '-', $name));
             $uploadpath = 'public/uploads/customer/';
-            $imageUrl = $uploadpath.$name; 
+            $imageUrl = $uploadpath.$name;
             $img=Image::make($image->getRealPath());
             $img->encode('webp', 90);
             $width = 100;
@@ -85,7 +85,7 @@ class CustomerManageController extends Controller
         Toastr::success('Success','Data update successfully');
         return redirect()->route('customers.index');
     }
- 
+
     public function inactive(Request $request){
         $inactive = Customer::find($request->hidden_id);
         $inactive->status = 'inactive';

@@ -13,7 +13,7 @@ use App\Models\OrderStatus;
 use App\Models\ProductVariable;
 use Carbon\Carbon;
 use Session;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Auth;
 use DB;
 
@@ -57,7 +57,7 @@ class DashboardController extends Controller
         })->with('product','image')
         ->limit(10)->get();
         return view('backEnd.admin.dashboard',compact('order_statuses','total_sale','today_order','today_sales','current_month_sale','total_order','current_month_order','total_customer','latest_order','dates_json','totals_json','products','variables'));
-        
+
     }
     public function changepassword()
     {

@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\CampaignReview;
 use App\Models\Campaign;
 use Image;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Str;
 use File;
 
@@ -21,7 +21,7 @@ class CampaignController extends Controller
          $this->middleware('permission:campaign-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:campaign-delete', ['only' => ['destroy']]);
     }
-    
+
     public function index(Request $request)
     {
         $show_data = Campaign::orderBy('id','DESC')->get();
@@ -40,9 +40,9 @@ class CampaignController extends Controller
             'name' => 'required',
             'status' => 'required',
         ]);
-        
+
         $input = $request->except(['files','image']);
-        
+
         // banner
         $image1 = $request->file('banner');
         $name1 =  time().'-'.$image1->getClientOriginalName();
@@ -53,7 +53,7 @@ class CampaignController extends Controller
 
         $input['slug'] = strtolower(Str::slug($request->name));
         $input['banner'] = $imageUrl1;
-        $campaign = Campaign::create($input); 
+        $campaign = Campaign::create($input);
 
         $images = $request->file('image');
         if($images){
@@ -69,13 +69,13 @@ class CampaignController extends Controller
                 $pimage->image       = $imageUrl;
                 $pimage->save();
             }
-            
-        }       
-        
+
+        }
+
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('campaign.index');
     }
-    
+
     public function edit($id)
     {
         $edit_data = Campaign::with('images')->find($id);
@@ -84,9 +84,9 @@ class CampaignController extends Controller
         $products = Product::where(['status'=>1])->select('id','name','status')->get();
         return view('backEnd.campaign.edit',compact('edit_data','products','select_products'));
     }
-    
+
     public function update(Request $request)
-    { 
+    {
         $this->validate($request, [
             'name' => 'required',
             'short_description' => 'required',
@@ -96,7 +96,7 @@ class CampaignController extends Controller
         // image one
         $update_data = Campaign::find($request->hidden_id);
         $input = $request->except('hidden_id','product_ids','files','image');
-        
+
         $image1 = $request->file('banner');
         if($image1){
             $image1 = $request->file('banner');
@@ -116,7 +116,7 @@ class CampaignController extends Controller
         $update_data = Campaign::find($request->hidden_id);
         $update_data->update($input);
 
-        $images = $request->file('image');  
+        $images = $request->file('image');
         if($images){
             foreach ($images as $key => $image) {
                 $name =  time().'-'.$image->getClientOriginalName();
@@ -135,7 +135,7 @@ class CampaignController extends Controller
         Toastr::success('Success','Data update successfully');
         return redirect()->route('campaign.index');
     }
- 
+
     public function inactive(Request $request)
     {
         $inactive = Campaign::find($request->hidden_id);
@@ -154,10 +154,10 @@ class CampaignController extends Controller
     }
     public function destroy(Request $request)
     {
-       
+
         $delete_data = Campaign::find($request->hidden_id);
         $delete_data->delete();
-        
+
         $campaign = Product::whereNotNull('campaign_id')->get();
         foreach($campaign as $key=>$value){
             $product = Product::find($value->id);
@@ -168,11 +168,11 @@ class CampaignController extends Controller
         return redirect()->back();
     }
     public function imgdestroy(Request $request)
-    { 
+    {
         $delete_data = CampaignReview::find($request->id);
         File::delete($delete_data->image);
         $delete_data->delete();
         Toastr::success('Success','Data delete successfully');
         return redirect()->back();
-    } 
+    }
 }

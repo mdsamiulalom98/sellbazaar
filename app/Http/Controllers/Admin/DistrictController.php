@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\District;
 use Image;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Str;
 
 class DistrictController extends Controller

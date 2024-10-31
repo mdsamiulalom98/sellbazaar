@@ -27,11 +27,11 @@
                                     </td>
                                     <td>
                                         <p>Phone</p>
-                                        <p><strong>{{ $order->shipping ? $order->shipping->phone : '' }}</strong></p>
+                                        <p><strong class="white-space-nowrap">{{ $order->shipping ? $order->shipping->phone : '' }}</strong></p>
                                     </td>
                                     <td>
                                         <p>Total</p>
-                                        <p><strong>৳ {{ $order->amount }}</strong></p>
+                                        <p><strong class="white-space-nowrap">৳ {{ $order->amount }}</strong></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,7 +65,7 @@
 
                                         </td>
                                         <td>
-                                            <p><strong>৳ {{ $value->sale_price }}</strong></p>
+                                            <p><strong class="white-space-nowrap">৳ {{ $value->sale_price }}</strong></p>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -124,7 +124,7 @@
           container.appendChild(canvas);
 
           let confetti_button = confetti.create(canvas);
-          
+
           confetti_button().then(() => {
               container.removeChild(canvas);
           });
@@ -145,27 +145,27 @@
            fire(0.25, {
               spread: 26,
               startVelocity: 55,
-              decay: 0.9, 
+              decay: 0.9,
           });
           fire(0.2, {
               spread: 60,
-              decay: 0.88, 
+              decay: 0.88,
           });
           fire(0.35, {
               spread: 100,
-              decay: 0.89, 
+              decay: 0.89,
               scalar: 0.8
           });
           fire(0.1, {
               spread: 120,
               startVelocity: 25,
-              decay: 0.9, 
+              decay: 0.9,
               scalar: 1.2
           });
           fire(0.1, {
               spread: 120,
               startVelocity: 45,
-              decay: 0.9, 
+              decay: 0.9,
           });
 
           // Delay before the second round of confetti
@@ -182,31 +182,31 @@
          fire(0.25, {
               spread: 26,
               startVelocity: 55,
-              decay: 0.9, 
+              decay: 0.9,
           });
           fire(0.2, {
               spread: 60,
-              decay: 0.88, 
+              decay: 0.88,
           });
           fire(0.35, {
               spread: 100,
-              decay: 0.89, 
+              decay: 0.89,
               scalar: 0.8
           });
           fire(0.1, {
               spread: 120,
               startVelocity: 25,
-              decay: 0.9, 
+              decay: 0.9,
               scalar: 1.2
           });
           fire(0.1, {
               spread: 120,
               startVelocity: 45,
-              decay: 0.9, 
+              decay: 0.9,
           });
 
-            }, 500); 
- 
+            }, 500);
+
       };
     </script>
     @if (Session::get('purchase_event'))

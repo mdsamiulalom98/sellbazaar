@@ -9,7 +9,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Payment;
 use Session;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Cart;
 class ShurjopayControllers extends Controller
 {
@@ -26,20 +26,20 @@ class ShurjopayControllers extends Controller
             $order = Order::where('id',$data[0]->id)->first();
             $order->order_status = 2;
             $order->save();
-            
+
             $payment = Payment::where(['order_id'=>$order->id])->first();
             $payment->payment_method = $data[0]->method;
             $payment->trx_id         = $data[0]->bank_trx_id;
             $payment->sender_number  = $data[0]->phone_no;
             $payment->payment_status = $data[0]->bank_status;
             $payment->save();
-            
+
             $customer_id = $data[0]->value1;
-           Cart::instance('shopping')->destroy(); 
+           Cart::instance('shopping')->destroy();
            Toastr::success('Thanks, Your order place successfully', 'Success!');
            return redirect('customer/order-success/'.$order->id);
-        
-       
+
+
     }
      public function payment_cancel(Request $request){
         Toastr::error('Your payment cancelled', 'Cancelled!');

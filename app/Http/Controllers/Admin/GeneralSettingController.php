@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
-use Toastr;
+use Illuminate\Support\Facades\Artisan;
+use Brian2694\Toastr\Facades\Toastr;
 use Image;
 use File;
 
@@ -195,6 +196,14 @@ class GeneralSettingController extends Controller
         File::delete($delete_data->image);
         $delete_data->delete();
         Toastr::success('Success','Data delete successfully');
+        return redirect()->back();
+    }
+    public function cache_reboot (){
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        Toastr::success('success', 'Cache Rebooted Successfully');
         return redirect()->back();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Size;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SizeController extends Controller
 {
@@ -30,23 +30,23 @@ class SizeController extends Controller
         $this->validate($request, [
             'status' => 'required',
         ]);
-        
+
         $input = $request->all();
-        
-        Size::create($input);        
-        
+
+        Size::create($input);
+
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('sizes.index');
     }
-    
+
     public function edit($id)
     {
         $edit_data = Size::find($id);
         return view('backEnd.size.edit',compact('edit_data'));
     }
-    
+
     public function update(Request $request)
-    { 
+    {
         $this->validate($request, [
             'status' => 'required',
         ]);
@@ -58,7 +58,7 @@ class SizeController extends Controller
         Toastr::success('Success','Data update successfully');
         return redirect()->route('sizes.index');
     }
- 
+
     public function inactive(Request $request)
     {
         $inactive = Size::find($request->hidden_id);
@@ -76,7 +76,7 @@ class SizeController extends Controller
         return redirect()->back();
     }
     public function destroy(Request $request)
-    {       
+    {
         $delete_data = Size::find($request->hidden_id);
         $delete_data->delete();
         Toastr::success('Success','Data delete successfully');

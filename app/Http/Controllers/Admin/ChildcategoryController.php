@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Childcategory;
 use App\Models\Subcategory;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 use Image;
 use File;
 use Str;
@@ -19,7 +19,7 @@ class ChildcategoryController extends Controller
         ->where("subcategorytype", $request->childcategorytype)
         ->pluck('name', 'id');
         return response()->json($category);
-    }        
+    }
 
     function __construct()
     {
@@ -45,25 +45,25 @@ class ChildcategoryController extends Controller
             'name' => 'required',
             'status' => 'required',
         ]);
-        
-        
+
+
         $input = $request->all();
         $input['slug'] = strtolower(preg_replace('/\s+/', '-', $request->name));
         $input['slug'] = str_replace('/', '', $input['slug']);
-        
+
         Childcategory::create($input);
         Toastr::success('Success','Data insert successfully');
         return back();
         return redirect()->route('childcategories.index');
     }
-    
+
     public function edit($id)
     {
         $edit_data = Childcategory::find($id);
         $categories = Subcategory::select('id','name')->get();
         return view('backEnd.childcategory.edit',compact('edit_data','categories'));
     }
-    
+
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -73,17 +73,17 @@ class ChildcategoryController extends Controller
         ]);
         $update_data = Childcategory::find($request->id);
         $input = $request->all();
-        
+
         $input['slug'] = strtolower(preg_replace('/\s+/', '-', $request->name));
         $input['slug'] = str_replace('/', '', $input['slug']);
         $input['status'] = $request->status?1:0;
-        
+
         $update_data->update($input);
 
         Toastr::success('Success','Data update successfully');
         return redirect()->route('childcategories.index');
     }
- 
+
     public function inactive(Request $request)
     {
         $inactive = Childcategory::find($request->hidden_id);

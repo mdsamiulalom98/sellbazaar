@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EcomPixel;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 class PixelsController extends Controller
 {
       function __construct()
@@ -15,7 +15,7 @@ class PixelsController extends Controller
          $this->middleware('permission:pixel-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:pixel-delete', ['only' => ['destroy']]);
     }
-    
+
      public function index(Request $request)
     {
         $data =EcomPixel::orderBy('id','DESC')->get();
@@ -36,13 +36,13 @@ class PixelsController extends Controller
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('pixels.index');
     }
-    
+
     public function edit($id)
     {
         $edit_data =EcomPixel::find($id);
         return view('backEnd.pixels.edit',compact('edit_data'));
     }
-    
+
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -56,7 +56,7 @@ class PixelsController extends Controller
         Toastr::success('Success','Data update successfully');
         return redirect()->route('pixels.index');
     }
- 
+
     public function inactive(Request $request)
     {
         $inactive =EcomPixel::find($request->hidden_id);

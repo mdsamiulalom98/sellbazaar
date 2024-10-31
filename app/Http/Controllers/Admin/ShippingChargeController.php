@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShippingCharge;
-use Toastr;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ShippingChargeController extends Controller
 {

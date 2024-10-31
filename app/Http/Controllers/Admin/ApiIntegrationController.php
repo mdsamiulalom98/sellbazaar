@@ -8,10 +8,6 @@ use App\Models\PaymentGateway;
 use App\Models\SmsGateway;
 use App\Models\Courierapi;
 use Brian2694\Toastr\Facades\Toastr;
-use File;
-use Str;
-use Image;
-use DB;
 
 class ApiIntegrationController extends Controller
 {

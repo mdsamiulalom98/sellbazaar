@@ -130,6 +130,13 @@
                             </a>
 
                             <!-- item-->
+                            <form action="{{ route('settings.cache_reboot') }}" method="POST" class="dropdown-item notify-item">
+                                @csrf
+                                <i class="fe-settings"></i>
+                                <button class="border-0" type="submit">Cache Reboot</button>
+                            </form>
+
+                            <!-- item-->
                             <a href="{{ route('locked') }}" class="dropdown-item notify-item">
                                 <i class="fe-lock"></i>
                                 <span>Lock Screen</span>
@@ -429,7 +436,7 @@
                                         <a href="{{ route('orderstatus.index') }}"><i data-feather="minus"></i>
                                             Order Status</a>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="{{ route('pages.index') }}"><i data-feather="minus"></i> Create Page</a>
                                     </li>
