@@ -35,7 +35,7 @@
                                 <div class="position-relative">
                                 @if ($details->old_price)
                                     <div class="discount">
-                                        <p> @php $discount=(((($details->old_price)-($details->new_price))*100) / ($details->old_price)) @endphp {{ number_format($discount, 0) }}% Discount</p>           
+                                        <p> @php $discount=(((($details->old_price)-($details->new_price))*100) / ($details->old_price)) @endphp {{ number_format($discount, 0) }}% Discount</p>
                                     </div>
                                 @endif
                                 @if($details->variableimages->count() > 0)
@@ -114,6 +114,7 @@
                                                     @endif ৳{{ $details->new_price }}
                                                 </p>
                                             @endif
+                                            <div data-v-28ecc559="" class="shipping_highlight" bis_skin_checked="1"><h4 data-v-28ecc559="">Delivery 1-3 Day, Payment In Cash</h4></div>
                                             <form action="{{ route('cart.store') }}" method="POST" name="formName">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $details->id }}" />
@@ -150,7 +151,7 @@
                                                     <div class="pro-size">
                                                         <p class="color-title">Select Size</p>
                                                         <div class="size_inner">
-                                                            
+
                                                             <div class="size-container">
                                                                 <div class="selector">
                                                                     @foreach ($productsizes as $prosize)
@@ -433,7 +434,7 @@
         </div>
     </section>
 
-    @endsection 
+    @endsection
 
     @push('script')
     <script src="{{ asset('public/frontEnd/js/owl.carousel.min.js') }}"></script>
@@ -690,6 +691,6 @@
     "value": "{{$details->name}}"
   }]
 }
-</script> 
+</script>
 
 @endpush

@@ -7,7 +7,12 @@
     --secondary-color-extra: #191919;
     --en-font: "Maven Pro", sans-serif;
 }
-
+.bg-theme {
+    background-color: var(--primary-color) !important;
+}
+.hind-siliguri {
+    font-family: "Hind Siliguri", serif;
+}
 body {
     font-family: "Lato", sans-serif;
     font-size: 15px;
@@ -24,6 +29,84 @@ body {
     font-family: "Hind Siliguri", serif;
 }
 /*==== COMMON CSS START ====*/
+/* Custom font-size utilities */
+.text-xs {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem; /* 16px */
+    font-weight: 400; /* Normal */
+}
+
+.text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+    font-weight: 400;
+}
+
+.text-base {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+    font-weight: 400;
+}
+
+.text-lg {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500; /* Medium */
+}
+
+.text-xl {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500;
+}
+
+.text-2xl {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    font-weight: 600; /* Semi-bold */
+}
+
+.text-3xl {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    font-weight: 600;
+}
+
+.text-4xl {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+    font-weight: 700; /* Bold */
+}
+
+.text-5xl {
+    font-size: 3rem; /* 48px */
+    line-height: 1; /* 48px */
+    font-weight: 700;
+}
+
+/* Example with italic and uppercase styles */
+.text-xs-italic {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.text-lg-uppercase {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Example with a different color */
+.text-3xl-muted {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    color: #6b7280; /* Gray color */
+}
+
 p {
     margin: 0;
     color: #000;
@@ -503,7 +586,7 @@ svg {
 }
 
 .go_cart, .go_cart:hover {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     width: 100%;
     color: #fff;
     border-radius: 5px;
@@ -560,20 +643,20 @@ svg {
 }
 
 .menu-area {
-    background: var(--primary-color);
     text-align: center;
 }
 
 .main-menu {
     position: relative;
     text-align: left;
+    background: var(--primary-color);
 }
 
 .main-menu ul li a {
-    text-transform: uppercase;
+    text-transform: capitalize;
     display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 550;
     color: var(--background-color);
     margin: 0 12px;
     padding: 8px 0;
@@ -626,6 +709,9 @@ svg {
 
 .main-menu ul li a:hover {
     color: var(--background-color);
+}
+.mega_menu ul li a:hover {
+    color: var(--primary-color);
 }
 /*==== HEADER CSS END ====  */
 
@@ -1152,8 +1238,8 @@ footer {
 .order_now_btn:hover,
 .order_now_btn:active {
     color: white !important;
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
+    background-color: var(--primary-color) ;
+    border-color: var(--primary-color) ;
     outline: 0;
     color: #fff !important;
 }
@@ -2166,8 +2252,10 @@ button.submit-btn {
 }
 
 .checkout-shipping h6 {
-    font-weight: 600;
+    font-weight: 900;
     color: #fff;
+    font-size: 16px;
+    text-align: center;
 }
 
 a.check-wapp.check-btn {
@@ -2246,7 +2334,7 @@ a.check-wapp.check-btn {
 }
 
 .order_place:hover {
-    background: var(--secondary-color);
+    background: var(--primary-color);
 }
 
 /*====  CHECKOUT CSS END ====  */
@@ -3356,4 +3444,22 @@ i.fa-solid.fa-phone.icon3 {
     color: var(--primary-color);
     text-decoration: none;
     display: flex;
+}
+
+.shipping_highlight {
+    margin: 5px 0;
+    margin-bottom: 10px;
+    padding: 2px 6px;
+    transition: 0.3s;
+    display: inline-block;
+    border: 2px solid black;
+    resize: both;
+    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230037ff' /%3E%3Cstop offset='25%25' stop-color='%230037ff' /%3E%3Cstop offset='50%25' stop-color='%230037ff' /%3E%3Cstop offset='100%25' stop-color='%230037ff' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3' stroke-dasharray='388'/%3E %3C/svg%3E") 1;
+}
+
+.shipping_highlight h4 {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--primary-color);
+    margin: 0;
 }

@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="page-sort">
-                                     @include('frontEnd.layouts.partials.sort_form')
+                                    @include('frontEnd.layouts.partials.sort_form')
                                 </div>
                             </div>
                         </div>
@@ -39,9 +39,9 @@
                                 @include('frontEnd.layouts.partials.product')
                             </div>
                         @empty
-                        <div class="no-found">
-                            <img src="{{asset('public/frontEnd/images/not-found.png')}}" alt="">
-                        </div>
+                            <div class="no-found">
+                                <img src="{{ asset('public/frontEnd/images/not-found.png') }}" alt="">
+                            </div>
                         @endforelse
                     </div>
                 </div>
@@ -50,7 +50,6 @@
                 <div class="col-sm-12">
                     <div class="custom_paginate">
                         {{ $products->links('pagination::bootstrap-4') }}
-
                     </div>
                 </div>
             </div>

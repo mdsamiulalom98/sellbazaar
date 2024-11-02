@@ -15,7 +15,7 @@ class Order extends Model
     }
     public function product()
     {
-        return $this->belongsTo(OrderDetails::class, 'id', 'order_id')->select('id','order_id','product_id');
+        return $this->belongsTo(OrderDetails::class, 'id', 'order_id')->select('id', 'order_id', 'product_id');
     }
     public function status()
     {
@@ -31,15 +31,17 @@ class Order extends Model
     }
     public function customer()
     {
-        return $this->belongsTo(Customer::class,'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function card()
     {
-        return $this->belongsTo(GiftCard::class, 'id','order_id');
+        return $this->belongsTo(GiftCard::class, 'id', 'order_id');
     }
+
+
 }

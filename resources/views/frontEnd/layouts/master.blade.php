@@ -160,24 +160,35 @@
             </ul>
         </div>
     </div>
-    <div  class="header_top_area" >
-        <div  class="container" >
-            <div  class="row" >
-                <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mobile_screen_768_view_none" >
-                    <div  class="header_top_area_left" ><p >Welcome to {{ $generalsetting->name }}</p></div>
+    <div class="header_top_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mobile_screen_768_view_none">
+                    <div class="header_top_area_left">
+                        <p>Welcome to {{ $generalsetting->name }}</p>
+                    </div>
                 </div>
-                <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" >
-                    <div  class="header_top_area_right" >
-                        <div  class="header_top_area_right_content" >
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="header_top_area_right">
+                        <div class="header_top_area_right_content gap-3">
 
-                            <span  class="header_top_area_right_list">
-                                <a  href="{{ route('contact') }}" class="">
-                                    <div  class="header_top_area_right_list_img mx-2" ><i  class="fa-solid fa-headset"></i></div>
-                                    <span >
-
-                                            Contact
-
+                            <span class="header_top_area_right_list">
+                                <a href="{{ route('contact') }}" class="">
+                                    <div class="header_top_area_right_list_img mx-2">
+                                        <i class="fa-solid fa-headset"></i>
+                                    </div>
+                                    <span>
+                                        Contact
                                     </span>
+                                </a>
+                            </span>
+
+                            <span class="header_top_area_right_list track_btn">
+                                <a href="{{ route('customer.order_track') }}">
+                                    <div class="header_top_area_right_list_img mx-2">
+                                        <i class="fa fa-truck"></i>
+                                    </div>
+                                    <span>Track Order</span>
                                 </a>
                             </span>
                         </div>
@@ -212,7 +223,7 @@
         <div class="mobile-search main-search">
             <form action="{{ route('search') }}">
                 <input type="text" placeholder="Search Product..." class="search_keyword search_click"
-                    name="keyword" />
+                    name="keyword" value="{{ request()->get('keyword') }}" />
                 <button><i data-feather="search"></i></button>
             </form>
             <div class="search_result"></div>
@@ -233,19 +244,24 @@
                                 <div class="main-search">
                                     <form action="{{ route('search') }}">
                                         <input type="text" placeholder="Search Product..."
+                                            value="{{ request()->get('keyword') }}"
                                             class="search_keyword search_click" name="keyword" />
                                         <button><i data-feather="search"></i></button>
                                     </form>
                                     <div class="search_result"></div>
                                 </div>
                                 <div class="header-list-items">
-                                    <ul>
-                                        <li class="track_btn">
-                                            <a href="{{ route('customer.order_track') }}"> <i
-                                                    class="fa fa-truck"></i>
-                                                    <strong>Track Order</strong>
-                                                </a>
+                                    <ul class="d-flex align-items-center">
+                                        <li class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <a href="{{ route('customer.account') }}">
+                                                <div class="align-items-baseline d-flex flex-column">
+                                                    <p class="d-block">Call us now</p>
+                                                    <strong class="d-block">{{ $contact->hotline }}</strong>
+                                                </div>
+                                            </a>
                                         </li>
+
                                         @if (Auth::guard('customer')->user())
                                             <li class="for_order">
                                                 <p>
@@ -271,7 +287,8 @@
                                                 <p class="margin-shopping">
                                                     <i class="fa-solid fa-cart-shopping"></i>
                                                     <span>{{ Cart::instance('shopping')->count() }}</span>
-                                                    <strong class="mx-1 taka-sign">{{ Cart::instance('shopping')->subtotal() }}</strong>
+                                                    <strong
+                                                        class="mx-1 taka-sign">{{ Cart::instance('shopping')->subtotal() }}</strong>
                                                 </p>
                                             </a>
                                             <div class="cshort-summary">
@@ -379,7 +396,8 @@
                             <ul>
                                 <li class="title "><a>Useful Link</a></li>
                                 @foreach ($pages as $page)
-                                    <li><a href="{{ route('page', ['slug' => $page->slug]) }}">{{ $page->name }}</a>
+                                    <li><a
+                                            href="{{ route('page', ['slug' => $page->slug]) }}">{{ $page->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -674,6 +692,14 @@
                     }
                 },
             });
+        });
+        $(document).on('click', function(event) {
+            const $target = $('.search_result'); // Replace with your class name
+            console.log('working');
+            // Check if the click happened outside the target element
+
+            $(".search_click").empty(); // Hide the element
+
         });
     </script>
     <!-- search js start -->

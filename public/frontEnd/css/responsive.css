@@ -18,6 +18,9 @@
         --secondary-color: #00aef0;
         --secondary-color-extra: #153e58;
     }
+    .header_top_area {
+        display: none;
+    }
     .dimage_item img {
         object-fit: contain;
         pointer-events: none;

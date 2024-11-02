@@ -26,7 +26,6 @@ use App\Models\PaymentGateway;
 use App\Models\SmsGateway;
 use App\Models\GeneralSetting;
 use App\Models\CouponCode;
-use Mail;
 
 class CustomerController extends Controller
 {
@@ -319,7 +318,7 @@ class CustomerController extends Controller
         $select_charge = ShippingCharge::where(['status' => 1, 'website' => 1])->first();
         $bkash_gateway = PaymentGateway::where(['status' => 1, 'type' => 'bkash'])->first();
         $shurjopay_gateway = PaymentGateway::where(['status' => 1, 'type' => 'shurjopay'])->first();
-        
+
         if (Session::get('free_shipping') == 1) {
             Session::put('shipping', 0);
         } else {
@@ -335,7 +334,7 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
-        
+
         if (Cart::instance('shopping')->count() <= 0) {
             Toastr::error('Your shopping empty', 'Failed!');
             return redirect()->back();
@@ -483,8 +482,7 @@ class CustomerController extends Controller
     }
     public function order_success($id)
     {
-        $order = Order::where('id', $id)->firstOrFail();
-        return view('frontEnd.layouts.customer.order_success', compact('order'));
+        return view('frontEnd.layouts.customer.order_success');
     }
     public function invoice(Request $request)
     {
@@ -502,8 +500,8 @@ class CustomerController extends Controller
         // return $orders;
         return view('frontEnd.layouts.customer.pdfreader', compact('order','orders'));
     }
-    
-    
+
+
     public function order_note(Request $request)
     {
         $order = Order::where(['id' => $request->id, 'customer_id' => Auth::guard('customer')->user()->id])->firstOrFail();

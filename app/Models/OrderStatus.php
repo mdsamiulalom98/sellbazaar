@@ -13,4 +13,6 @@ class OrderStatus extends Model
     public function orders(){
         return $this->hasMany(Order::class, 'order_status')->select('id','order_status');
     }
+
+
 }

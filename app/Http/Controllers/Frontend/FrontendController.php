@@ -17,7 +17,6 @@ use App\Models\District;
 use App\Models\CreatePage;
 use App\Models\Campaign;
 use App\Models\Banner;
-use App\Models\CouponCode;
 use App\Models\ShippingCharge;
 use App\Models\Customer;
 use App\Models\OrderDetails;
@@ -26,13 +25,10 @@ use App\Models\Payment;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Brand;
-use Cache;
-use DB;
-use Log;
+
 class FrontendController extends Controller
 {
     public function index(){
-
         $sliders = Banner::where(['status' => 1, 'category_id' => 1])
             ->select('id', 'image', 'link')
             ->get();
@@ -108,7 +104,7 @@ class FrontendController extends Controller
         }
 
         $products = $products->paginate(30)->withQueryString();
-        
+
         return view('frontEnd.layouts.pages.subcategory', compact('subcategory', 'products'));
     }
 
@@ -274,8 +270,8 @@ class FrontendController extends Controller
         $keyword = $request->keyword;
         return view('frontEnd.layouts.pages.search', compact('products', 'keyword'));
     }
-    
-    
+
+
     public function shipping_charge(Request $request)
     {
         if ($request->id == NULL) {
@@ -469,7 +465,7 @@ class FrontendController extends Controller
     }
 
 
-        
+
 
         // DB::listen(function ($query) {
         //     Log::channel('test_log')->info('===== started db query ========================================');

@@ -31,7 +31,7 @@
                                             <td>{{ $value->created_at->format('d-m-y') }}</td>
                                             <td>৳{{ $value->amount }}</td>
                                             <td>৳{{ $value->discount }}</td>
-                                            <td>{{ $value->status ? $value->status->name : '' }}</td>
+                                            <td><span class="badge {{ $value->status->color ?? 'bg-light' }}">{{ $value->status ? $value->status->name : '' }}</span></td>
 
                                             <td><a href="{{ route('customer.invoice', ['id' => $value->id]) }}"
                                                     class="invoice_btn"><i class="fa-solid fa-eye"></i></a>
@@ -49,5 +49,5 @@
             </div>
         </div>
     </section>
-   
+
 @endsection
